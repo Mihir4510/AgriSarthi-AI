@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { Compass, Search, Leaf, Info, Droplet, Star, TrendingUp } from 'lucide-react';
 
 export default function CropAdvisor({ modeSettings }) {
@@ -29,7 +29,7 @@ export default function CropAdvisor({ modeSettings }) {
         'x-force-demo': modeSettings.forceDemo ? 'true' : 'false'
       };
       
-      const response = await axios.post('http://localhost:5000/api/crop-advisor', formData, { headers });
+      const response = await api.post('/crop-advisor', formData, { headers });
       if (response.data.success) {
         setCrops(response.data.data);
       } else {

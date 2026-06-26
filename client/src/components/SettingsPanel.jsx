@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { Database, ShieldAlert, Sparkles, Key, CheckCircle, RefreshCw } from 'lucide-react';
 
 export default function SettingsPanel({ modeSettings, setModeSettings }) {
@@ -11,7 +11,7 @@ export default function SettingsPanel({ modeSettings, setModeSettings }) {
   const checkDbStatus = async () => {
     setLoadingDb(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/db-status');
+      const response = await api.get('/db-status');
       setDbConnected(response.data.connected);
     } catch (e) {
       setDbConnected(false);

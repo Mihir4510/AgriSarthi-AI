@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { CloudRain, Sun, Cloud, AlertTriangle, Compass, CheckCircle, Navigation, Wind } from 'lucide-react';
 
 export default function WeatherPanel({ modeSettings }) {
@@ -16,7 +16,7 @@ export default function WeatherPanel({ modeSettings }) {
         'x-force-demo': modeSettings.forceDemo ? 'true' : 'false'
       };
       
-      const response = await axios.post('http://localhost:5000/api/weather', {
+      const response = await api.post('/weather', {
         location: locationInput
       }, { headers });
 
@@ -51,7 +51,7 @@ export default function WeatherPanel({ modeSettings }) {
             'x-gemini-key': modeSettings.apiKey || '',
             'x-force-demo': modeSettings.forceDemo ? 'true' : 'false'
           };
-          const response = await axios.post('http://localhost:5000/api/weather', {
+          const response = await api.post('/weather', {
             location: mockLocation
           }, { headers });
 

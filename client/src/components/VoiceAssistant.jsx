@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { Mic, MicOff, Volume2, Sparkles, AlertCircle, Play, Square, RefreshCw } from 'lucide-react';
 
 export default function VoiceAssistant({ modeSettings }) {
@@ -78,7 +78,7 @@ export default function VoiceAssistant({ modeSettings }) {
         if (query.includes('soybean') || query.includes('सोयाबीन')) crop = 'Soybean';
         if (query.includes('cotton') || query.includes('कपास')) crop = 'Cotton';
 
-        const response = await axios.post('http://localhost:5000/api/market', { cropName: crop }, { headers });
+        const response = await api.post('/market', { cropName: crop }, { headers });
         if (response.data.success) {
           const data = response.data.data;
           const speechText = language === 'hi-IN'
@@ -95,7 +95,7 @@ export default function VoiceAssistant({ modeSettings }) {
         const matches = query.match(/\d+/);
         if (matches) acres = parseInt(matches[0]);
 
-        const response = await axios.post('http://localhost:5000/api/farm-plan', {
+        const response = await api.post('/farm-plan', {
           location: 'Indore',
           acres: acres,
           soilType: 'Black',

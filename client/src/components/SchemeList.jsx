@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { Landmark, Search, ChevronDown, ChevronUp, FileText, CheckCircle, Info } from 'lucide-react';
 
 export default function SchemeList({ modeSettings }) {
@@ -30,7 +30,7 @@ export default function SchemeList({ modeSettings }) {
         'x-force-demo': modeSettings.forceDemo ? 'true' : 'false'
       };
       
-      const response = await axios.post('http://localhost:5000/api/schemes', formData, { headers });
+      const response = await api.post('/schemes', formData, { headers });
       if (response.data.success) {
         setSchemes(response.data.data);
         setExpandedIdx(0); // auto-expand first matched item

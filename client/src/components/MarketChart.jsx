@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { TrendingUp, Search, Info, MapPin, Sparkles, AlertCircle } from 'lucide-react';
 
 export default function MarketChart({ modeSettings }) {
@@ -17,7 +17,7 @@ export default function MarketChart({ modeSettings }) {
         'x-force-demo': modeSettings.forceDemo ? 'true' : 'false'
       };
       
-      const response = await axios.post('http://localhost:5000/api/market', {
+      const response = await api.post('/market', {
         cropName: cropInput
       }, { headers });
 

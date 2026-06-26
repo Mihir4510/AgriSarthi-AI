@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { Camera, Image as ImageIcon, Sparkles, CheckCircle, ShieldAlert, AlertCircle, Wrench } from 'lucide-react';
 
 export default function DiseaseScanner({ modeSettings }) {
@@ -66,7 +66,7 @@ export default function DiseaseScanner({ modeSettings }) {
           'x-gemini-key': modeSettings.apiKey || '',
           'x-force-demo': modeSettings.forceDemo ? 'true' : 'false'
         };
-        const response = await axios.post('http://localhost:5000/api/disease-detect', {
+        const response = await api.post('/disease-detect', {
           filename: imageName
         }, { headers });
 

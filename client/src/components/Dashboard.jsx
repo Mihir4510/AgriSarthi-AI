@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { AlertTriangle, Sprout, TrendingUp, ShieldCheck, CheckCircle, Activity, ChevronRight, Zap } from 'lucide-react';
 
 export default function Dashboard({ setActiveTab }) {
@@ -10,7 +10,7 @@ export default function Dashboard({ setActiveTab }) {
   const fetchDashboardData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/history/farm-plans');
+      const response = await api.get('/history/farm-plans');
       if (response.data.success && response.data.data.length > 0) {
         setPlans(response.data.data);
         setRecentLog(response.data.data[0]);

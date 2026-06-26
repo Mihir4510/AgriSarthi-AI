@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { Sprout, IndianRupee, MapPin, Calendar, Compass, Layers, Droplet, ArrowRight, ShieldAlert, Sparkles, CheckSquare, Square, CheckCircle } from 'lucide-react';
 
 export default function FarmPlanner({ modeSettings }) {
@@ -34,7 +34,7 @@ export default function FarmPlanner({ modeSettings }) {
         'x-force-demo': modeSettings.forceDemo ? 'true' : 'false'
       };
       
-      const response = await axios.post('http://localhost:5000/api/farm-plan', formData, { headers });
+      const response = await api.post('/farm-plan', formData, { headers });
       if (response.data.success) {
         setPlanResult(response.data.data);
         setChecklist(response.data.data.checklist || []);

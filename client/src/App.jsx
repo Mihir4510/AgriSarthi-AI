@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from './services/api';
 import { LayoutDashboard, Sprout, Leaf, Camera, CloudRain, TrendingUp, Landmark, Mic, Settings, Sparkles, Database } from 'lucide-react';
 import Dashboard from './components/Dashboard';
 import FarmPlanner from './components/FarmPlanner';
@@ -29,7 +29,7 @@ export default function App() {
     // Monitor MongoDB connectivity
     const checkDB = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/db-status');
+        const res = await api.get('/db-status');
         setDbConnected(res.data.connected);
       } catch (e) {
         setDbConnected(false);
